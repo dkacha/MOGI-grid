@@ -1,0 +1,53 @@
+// Nastavení gridu
+@mogi-grid-column-quantity: 12; // výchozí mřížka
+@mogi-grid-class: g; // výchízí název třídy
+
+
+// mixin generující media queries
+.mogi-grid(@breakpoint: 0, @to: @mogi-grid-column-quantity, @from: 1){
+	& when not (@breakpoint = 0){
+		@media (min-width: (@breakpoint + 0px)) {
+			.mogi-grid-columns(@breakpoint, @from, @to); 
+		}
+	}
+	& when (@breakpoint = 0){
+		.mogi-grid-columns(@breakpoint, @from, @to); 
+	}
+}
+// mixin generující jednotlivé rozměry buněk
+.mogi-grid-columns(@breakpoint, @from, @to) when (@from =< @to) {  	
+	.@{mogi-grid-class}__i--@{breakpoint}-@{from}-@{to} when not (@breakpoint = 0) {
+		width: percentage(@from / @to);
+	}
+	.@{mogi-grid-class}__i--@{from}-@{to} when (@breakpoint = 0) {
+		width: percentage(@from / @to);
+	}
+	.mogi-grid-columns(@breakpoint, (@from + 1), @to); 
+}
+  
+// základní css pro grid
+.@{mogi-grid-class}{
+	display: flex;
+	flex-flow: row wrap;
+	font-size: 0;
+	&__i, & [class *= "__i"]{
+		
+	}
+}
+[class *= "@{mogi-grid-class}__i"]{
+	display: inline-block;
+	*display: inline; // IE < 8
+	zoom: 1;
+	vertical-align: top;
+	font-size: 1rem;
+	background: red;
+	width: 100%;
+}
+
+// volání jednotlivých breakpoitnů gridu
+.mogi-grid(0);
+.mogi-grid(450);
+.mogi-grid(600);
+.mogi-grid(900);
+.mogi-grid(1200);
+  

@@ -1,0 +1,73 @@
+// Nastavení gridu
+@mogi-grid-column-quantity: 12; // výchozí mřížka
+@mogi-grid-class: g; // výchozí název třídy
+
+
+// mixin generující media queries
+.mogi-grid(@breakpoint: 0, @breakpoint-name: (unit(@breakpoint)), @to: @mogi-grid-column-quantity, @from: 1){
+	& when not (@breakpoint = 0){
+		@media (min-width: @breakpoint) {
+			.mogi-grid-columns(@breakpoint, @breakpoint-name, @from, @to);  
+		}
+	}
+	& when (@breakpoint = 0){
+		.mogi-grid-columns(@breakpoint, @breakpoint-name, @from, @to); 
+	}
+}
+// mixin generující jednotlivé rozměry buněk
+.mogi-grid-columns(@breakpoint, @breakpoint-name, @from, @to) when (@from =< @to) {  	
+	
+	// generování jednodlivých rozměrů
+	.@{mogi-grid-class}__i--@{breakpoint-name}-@{from}-@{to} when (@breakpoint > 0) {
+		width: percentage(@from / @to);
+	}
+	
+	.@{mogi-grid-class}__i--@{from}-@{to} when (@breakpoint = 0) {
+		width: percentage(@from / @to);
+	}
+
+	// třída pro skrytí
+	.@{mogi-grid-class}__hidden when (@from = @to) and (@breakpoint = 0) {
+		display: none;
+	}
+	.@{mogi-grid-class}__hidden--@{breakpoint-name} when (@from = @to) and (@breakpoint > 0) {
+		display: none;
+	}
+
+	// třída pro zobrazení
+	.@{mogi-grid-class}__visible when (@from = @to) and (@breakpoint = 0) {
+		display: block;
+	}
+	.@{mogi-grid-class}__visible--@{breakpoint-name} when (@from = @to) and (@breakpoint > 0) {
+		display: block;
+	}
+
+	.mogi-grid-columns(@breakpoint, @breakpoint-name, (@from + 1), @to); 
+}
+  
+// základní css pro grid
+.@{mogi-grid-class}{
+	display: flex;
+	flex-flow: row wrap;
+	font-size: 0;
+	&__i, & [class *= "__i"]{
+		
+	}
+}
+[class *= "@{mogi-grid-class}__i"]{
+	display: inline-block;
+	*display: inline; // IE < 8
+	zoom: 1; // IE < 8
+	vertical-align: top;
+	font-size: 1rem;
+	background: red;
+	width: 100%;
+}
+
+// volání jednotlivých breakpoitnů gridu
+.mogi-grid(0);
+.mogi-grid(35.5em, sm);
+.mogi-grid(48em, md);
+.mogi-grid(64em, lg);
+.mogi-grid(80em, xl);
+  

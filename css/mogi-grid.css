@@ -13,8 +13,9 @@
   *display: inline;
   zoom: 1;
   vertical-align: top;
-  font-size: 1rem;
+  font-size: 15px;
   width: 100%;
+  background: red;
 }
 .g__i--1-12 {
   width: 8.33333333%;

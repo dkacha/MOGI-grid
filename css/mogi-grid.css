@@ -6,16 +6,31 @@
   -webkit-flex-flow: row wrap;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
-  font-size: 0;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
+  letter-spacing: -0.31em;
+  /* Webkit: odstranění mezer mezi bloky */
+  *letter-spacing: normal;
+  /* reset IE < 8 */
+  *word-spacing: -0.43em;
+  /* IE < 8:  */
+  word-spacing: -0.43em;
+  text-rendering: optimizespeed;
+  /* Webkit: fix pro text-rendering: optimizeLegibility */
+  font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
 }
 [class*="g__i"] {
   display: inline-block;
   *display: inline;
   zoom: 1;
   vertical-align: top;
-  font-size: 15px;
   width: 100%;
   background: red;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-rendering: auto;
+  font-family: 'Tahoma';
 }
 .g__i--1-12 {
   width: 8.33333333%;
@@ -53,10 +68,10 @@
 .g__i--12-12 {
   width: 100%;
 }
-.g__hidden {
+.g__i__hidden {
   display: none;
 }
-.g__visible {
+.g__i__visible {
   display: block;
 }
 @media (min-width: 35.5em) {
@@ -96,10 +111,10 @@
   .g__i--sm-12-12 {
     width: 100%;
   }
-  .g__hidden--sm {
+  .g__i__hidden--sm {
     display: none;
   }
-  .g__visible--sm {
+  .g__i__visible--sm {
     display: block;
   }
 }
@@ -140,10 +155,10 @@
   .g__i--md-12-12 {
     width: 100%;
   }
-  .g__hidden--md {
+  .g__i__hidden--md {
     display: none;
   }
-  .g__visible--md {
+  .g__i__visible--md {
     display: block;
   }
 }
@@ -184,10 +199,10 @@
   .g__i--lg-12-12 {
     width: 100%;
   }
-  .g__hidden--lg {
+  .g__i__hidden--lg {
     display: none;
   }
-  .g__visible--lg {
+  .g__i__visible--lg {
     display: block;
   }
 }
@@ -228,10 +243,10 @@
   .g__i--xl-12-12 {
     width: 100%;
   }
-  .g__hidden--xl {
+  .g__i__hidden--xl {
     display: none;
   }
-  .g__visible--xl {
+  .g__i__visible--xl {
     display: block;
   }
 }

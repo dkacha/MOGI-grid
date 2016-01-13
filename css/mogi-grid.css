@@ -20,13 +20,11 @@
   /* Webkit: fix pro text-rendering: optimizeLegibility */
   font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
 }
-[class*="g__i"] {
+.g [class*="g__i"] {
   display: inline-block;
   *display: inline;
   zoom: 1;
   vertical-align: top;
-  width: 100%;
-  background: red;
   letter-spacing: normal;
   word-spacing: normal;
   text-rendering: auto;

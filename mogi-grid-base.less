@@ -46,21 +46,19 @@
 	flex-flow: row wrap;
 	align-content: flex-start;
 	letter-spacing: -0.31em; /* Webkit: odstranění mezer mezi bloky */
-    *letter-spacing: normal; /* reset IE < 8 */
-    *word-spacing: -0.43em; /* IE < 8:  */
+	*letter-spacing: normal; /* reset IE < 8 */
+	*word-spacing: -0.43em; /* IE < 8:  */
 	word-spacing: -0.43em;
-    text-rendering: optimizespeed; /* Webkit: fix pro text-rendering: optimizeLegibility */
+	text-rendering: optimizespeed; /* Webkit: fix pro text-rendering: optimizeLegibility */
 	font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
 }
-[class *= "@{mogi-grid-columns-class}"]{
+.@{mogi-grid-class} [class *= "@{mogi-grid-columns-class}"]{
 	display: inline-block;
 	*display: inline; // IE < 8
 	zoom: 1; // IE < 8
 	vertical-align: top;
-	width: 100%;
-	background: red;
 	letter-spacing: normal;
-    word-spacing: normal;
-    text-rendering: auto;
-	font-family: @mogi-grid-font;
+	word-spacing: normal;
+	text-rendering: auto;
+	font-family: @mogi-grid-font;	
 }

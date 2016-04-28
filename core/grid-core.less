@@ -1,0 +1,52 @@
+// mixin generující media queries
+.mogi-grid(@breakpoint: 0, @breakpoint-name: (unit(@breakpoint)), @to: @mogi-grid-column-quantity, @from: 1){
+	& when not (@breakpoint = 0){
+		@media (min-width: @breakpoint) {
+			.mogi-grid-columns(@breakpoint, @from, @to, ~'@{breakpoint-name}-');  
+		}
+	}
+	& when (@breakpoint = 0){
+		.mogi-grid-columns(@breakpoint, @from, @to); 
+	}
+}
+// mixin generující třídy gridu s rozměry a display stavem
+.mogi-grid-columns(@breakpoint, @from, @to, @breakpoint-modifier: ~'') when (@from =< @to) {  	
+	
+	// generování jednodlivých rozměrů buněk
+	.@{mogi-grid-columns-class}--@{breakpoint-modifier}@{from}-@{to} {
+		width: percentage(@from / @to);
+	}
+	
+	// třída pro skrytí
+	.@{mogi-grid-columns-class}--@{breakpoint-modifier}hidden when (@from = @to) {
+		display: none;
+	}
+
+	// třída pro zobrazení
+	.@{mogi-grid-columns-class}--@{breakpoint-modifier}visible when (@from = @to) {
+		display: block;
+	}
+
+	.mogi-grid-columns(@breakpoint, (@from + 1), @to, @breakpoint-modifier); 
+}
+  
+// základní css pro grid
+.@{mogi-grid-class}{
+	display: flex;
+	flex-flow: row wrap;
+	align-content: flex-start;
+	letter-spacing: -0.31em; /* Webkit: odstranění mezer mezi bloky */
+	word-spacing: -0.43em;
+	text-rendering: optimizespeed; /* Webkit: fix pro text-rendering: optimizeLegibility */
+	font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+}
+.@{mogi-grid-class} [class *= "@{mogi-grid-columns-class}"]{
+	display: inline-block;
+	vertical-align: top;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-rendering: auto;
+	& when not (@mogi-grid-font = false) {
+		font-family: @mogi-grid-font;
+	}
+}

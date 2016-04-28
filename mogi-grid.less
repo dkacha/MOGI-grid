@@ -1,22 +1,37 @@
 //////////////////////////////////////////////////
 ////////// Základní nastavení gridu /////////////
-
 @mogi-grid-column-quantity: 12; // výchozí mřížka
 @mogi-grid-class: g; // výchozí třída gridu
 @mogi-grid-columns-class: g__i; // výchozí třída buňěk
 @mogi-grid-font: 'Tahoma'; // výchozí velikost písma v buňce
  
 // Načtení mixinů a CSS pro základní grid
-@import 'mogi-grid-base'; 
+@import 'core/grid-core'; 
 
 // Generování jednotlivých breakpoitnů gridu
-.mogi-grid(0);
-.mogi-grid(35.5em, sm);
+.mogi-grid(0, null, 6);
+.mogi-grid(35.5em, sm, 6);
 .mogi-grid(48em, md);
 .mogi-grid(64em, lg);
-.mogi-grid(80em, xl); 
+.mogi-grid(80em, xl, 24);
 
 
 
 //////////////////////////////////////////////////
 ////////// ROZŠÍŘENÍ GRIDU ////////////////////// 
+
+
+// shift - posouvání buněk v řádku
+@import 'core/shift';
+
+.mogi-shift(0);
+.mogi-shift(35.5em, sm);
+.mogi-shift(48em, md);
+.mogi-shift(64em, lg);
+.mogi-shift(80em, xl); 
+
+.@{mogi-grid-class} [class *= "@{mogi-grid-columns-class}"]{
+	background: gray;
+	border: 1px solid red;
+	box-sizing: border-box;
+}

@@ -1,0 +1,34 @@
+.@{mogi-grid-class} [class *= "@{mogi-grid-columns-class}"]{
+	position: relative;
+}
+
+// mixin generující media queries
+.mogi-shift(@breakpoint: 0, @breakpoint-name: (unit(@breakpoint)), @to: @mogi-grid-column-quantity, @from: 1){
+	& when not (@breakpoint = 0){
+		@media (min-width: @breakpoint) {
+			.mogi-shift-columns(@breakpoint, @from, @to, ~'--@{breakpoint-name}');   
+		}
+	}
+	& when (@breakpoint = 0){
+		.mogi-shift-columns(@breakpoint, @from, @to); 
+	}
+}
+// mixin generující třídy gridu s rozměry a display stavem
+.mogi-shift-columns(@breakpoint, @from, @to, @breakpoint-modifier: -) when (@from =< @to) {  	
+
+	// generování jednodlivých posunů	
+	.@{mogi-grid-columns-class}@{breakpoint-modifier}-push-@{from}-@{to} {
+		left: percentage(@from / @to);
+	}
+	
+	.@{mogi-grid-columns-class}@{breakpoint-modifier}-pull-@{from}-@{to} {
+		left: (percentage(@from / @to)) * -1;
+	}
+	
+	// reset posunu
+	.@{mogi-grid-columns-class}@{breakpoint-modifier}-pureset when (@from = @to) {
+		left: auto;
+	}
+
+	.mogi-shift-columns(@breakpoint, (@from + 1), @to, @breakpoint-modifier); 
+}

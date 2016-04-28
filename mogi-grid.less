@@ -2,8 +2,8 @@
 ////////// Základní nastavení gridu /////////////
 @mogi-grid-column-quantity: 12; // výchozí mřížka
 @mogi-grid-class: g; // výchozí třída gridu
-@mogi-grid-columns-class: g__i; // výchozí třída buňěk
-@mogi-grid-font: 'Tahoma'; // výchozí velikost písma v buňce
+@mogi-grid-columns-class: g__i; // výchozí třída buněk
+@mogi-grid-font: 'Tahoma'; // výchozí font písma v buňce
  
 // Načtení mixinů a CSS pro základní grid
 @import 'core/grid-core'; 
@@ -30,6 +30,8 @@
 .mogi-shift(64em, lg);
 .mogi-shift(80em, xl); 
 
+
+// vizualizace buněk 
 .@{mogi-grid-class} [class *= "@{mogi-grid-columns-class}"]{
 	background: gray;
 	border: 1px solid red;
